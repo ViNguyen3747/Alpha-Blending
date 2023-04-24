@@ -1,5 +1,5 @@
 import { useGLTF, Center, GradientTexture } from "@react-three/drei";
-import { BackSide, Color } from "three";
+import { BackSide, AdditiveBlending, Color, Vector3 } from "three";
 import React from "react";
 import { extend, useThree } from "@react-three/fiber";
 import { BlendingShader } from "./Shaders";
@@ -7,15 +7,19 @@ import { BlendingShader } from "./Shaders";
 // declaratively
 extend({ BlendingShader });
 
-export default ({ springRef }) => {
+export default ({ bgColor }) => {
   const { nodes } = useGLTF("./model.glb");
-  const backgroundColor = useThree(({ viewport }) => {
-    viewport.background;
-  });
-  const { width: w, height: h } = useThree((state) => state.viewport);
+  const { camera } = useThree();
 
+  // Get the camera position
+  const cameraPosition = camera.position;
+
+  // Get the camera direction
+  const cameraDirection = new Vector3();
+
+  const { width: w, height: h } = useThree((state) => state.viewport);
   return (
-    <Center scale={w / 12} position={[0, 0.9, -0.5]} ref={springRef}>
+    <Center scale={w / 12} position={[0, 0.9, -0.5]}>
       <mesh geometry={nodes.window.geometry}>
         <meshStandardMaterial side={BackSide}>
           <GradientTexture
@@ -26,7 +30,11 @@ export default ({ springRef }) => {
         </meshStandardMaterial>
       </mesh>
       <mesh geometry={nodes.window.geometry}>
-        <blendingShader colorOutside={new Color("#ffdac6")} />
+        <blendingShader
+          backgroundColor={new Color(bgColor)}
+          cameraP={cameraPosition}
+          cameraD={camera.getWorldDirection(cameraDirection)}
+        />
       </mesh>
       <mesh geometry={nodes.window_frame.geometry}>
         <meshStandardMaterial color={"#d78a76"} />

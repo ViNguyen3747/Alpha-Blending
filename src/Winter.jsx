@@ -24,7 +24,7 @@ export default () => {
         </meshStandardMaterial>
       </mesh>
       <mesh geometry={nodes.window.geometry}>
-        <blendingShader colorOutside={new Color("#ffffff")} />
+        <blendingShader colorOutside={new Color("rgb(18, 103, 130)")} />
       </mesh>
       <mesh geometry={nodes.window_frame.geometry}>
         <meshStandardMaterial color={"#9a8c98"} />

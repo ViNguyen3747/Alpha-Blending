@@ -1,5 +1,5 @@
 import { useGLTF, Center, GradientTexture } from "@react-three/drei";
-import { BackSide, Color } from "three";
+import { BackSide, FrontSide, Color } from "three";
 import React from "react";
 import { extend, useThree } from "@react-three/fiber";
 import { BlendingShader } from "./Shaders";
@@ -10,8 +10,6 @@ extend({ BlendingShader });
 export default () => {
   const { nodes } = useGLTF("./model.glb");
   const { width: w, height: h } = useThree((state) => state.viewport);
-
-  const backgroundColor = useThree(({ viewport }) => viewport.background);
   return (
     <Center scale={w / 12} position={[w * 2.3, 0.9, -0.5]}>
       <mesh geometry={nodes.window.geometry}>
@@ -24,7 +22,7 @@ export default () => {
         </meshStandardMaterial>
       </mesh>
       <mesh geometry={nodes.window.geometry}>
-        <blendingShader colorOutside={new Color("#a57f60")} />
+        <blendingShader colorOutside={new Color("rgb(18, 103, 130)")} />
       </mesh>
       <mesh geometry={nodes.window_frame.geometry}>
         <meshStandardMaterial color={"#a98467"} />

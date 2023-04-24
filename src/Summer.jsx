@@ -11,7 +11,6 @@ export default ({ summerRef }) => {
   const { nodes } = useGLTF("./model.glb");
   const { width: w, height: h } = useThree((state) => state.viewport);
 
-  const backgroundColor = useThree(({ viewport }) => viewport.background);
   return (
     <Center scale={w / 12} position={[w * 1.2, 0.9, -0.5]} ref={summerRef}>
       <mesh geometry={nodes.window.geometry}>
@@ -24,7 +23,7 @@ export default ({ summerRef }) => {
         </meshStandardMaterial>
       </mesh>
       <mesh geometry={nodes.window.geometry}>
-        <blendingShader colorOutside={new Color("#126782")} />
+        <blendingShader colorOutside={new Color("rgb(18, 103, 130)")} />
       </mesh>
       <mesh geometry={nodes.window_frame.geometry}>
         <meshStandardMaterial color={"#bbd686"} />

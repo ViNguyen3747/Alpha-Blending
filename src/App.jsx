@@ -1,18 +1,26 @@
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import Spring from "./Spring";
-import { useRef } from "react";
-import { Vector3 } from "three";
+import { useEffect, useRef, useState } from "react";
+import { Vector3, Color } from "three";
 import { ScrollControls, useScroll } from "@react-three/drei";
 import Summer from "./Summer";
 import Fall from "./Fall";
 import Winter from "./Winter";
 
-const Models = () => {
+const Models = ({ bgColor }) => {
   const scroll = useScroll();
   const { width: w, height: h } = useThree((state) => state.viewport);
   const { camera, mouse } = useThree();
   const vec = new Vector3();
   const modelsRef = useRef();
+  // useEffect(() => {
+  //   const canvas = document.querySelector("canvas");
+  //   if (scroll.offset < 0.2) {
+  //     canvas.style.background = bgColor;
+  //   } else {
+  //     canvas.style.background = "rgb(213, 164, 164)";
+  //   }
+  // }, []);
   useFrame(() => {
     modelsRef.current.position.x = -(scroll.offset * w * 4);
     camera.position.lerp(
@@ -23,7 +31,7 @@ const Models = () => {
   return (
     <>
       <group ref={modelsRef}>
-        <Spring />
+        <Spring bgColor={bgColor} />
         <Summer />
         <Fall />
         <Winter />
@@ -32,6 +40,7 @@ const Models = () => {
   );
 };
 function App() {
+  const [bgColor, setBgColor] = useState("#ffafcc");
   return (
     <>
       <div className="logo">
@@ -40,11 +49,14 @@ function App() {
           Vi Nguyen
         </a>
       </div>
-      <Canvas camera={{ position: [0, 0, 10], fov: 40 }}>
+      <Canvas
+        camera={{ position: [0, 0, 10], fov: 40 }}
+        style={{ background: bgColor }}
+      >
         <ambientLight intensity={1} />
         <directionalLight position={[10, 10, 2]} intensity={1} />
         <ScrollControls damping={1} pages={4}>
-          <Models />
+          <Models bgColor={bgColor} />
         </ScrollControls>
       </Canvas>
     </>
