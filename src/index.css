@@ -24,9 +24,8 @@ canvas {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #d5bdaf;
+  background-color: #ffffff;
   border-radius: 10px;
-  border: 2px solid #ffffff;
 }
 .Overlay {
   display: flex;
@@ -37,26 +36,24 @@ canvas {
   z-index: 1;
   bottom: 0;
   left: 0;
-  margin: 20px;
+  padding: 10px;
   font-family: "Sono", sans-serif;
-  color: #464545;
-  font-size: 12px;
-}
-
-.logo > span {
-  pointer-events: none;
+  color: #ffffff;
+  font-size: 0.8rem;
+  letter-spacing: 0.2rem;
 }
 
 a {
   text-decoration: none;
-  color: #464545;
+  color: #ffffff;
   position: relative;
+  cursor: url("cursor.png"), default;
 }
 a:hover {
   cursor: url("cursor.png"), default;
 }
-a::before {
-  background-color: #464545;
+#name::before {
+  background-color: #ffffff;
   content: "";
   display: inline-block;
   height: 1px;
@@ -64,8 +61,8 @@ a::before {
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   width: 0.7rem;
 }
-a:hover::before {
-  background-color: #464545;
+a:hover #name::before {
+  background-color: #ffffff;
   width: 3rem;
   cursor: url("cursor.png"), default;
 }

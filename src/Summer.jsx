@@ -1,18 +1,13 @@
 import { useGLTF, Center, GradientTexture } from "@react-three/drei";
 import { BackSide, Color } from "three";
 import React from "react";
-import { extend, useThree } from "@react-three/fiber";
-import { BlendingShader } from "./Shaders";
+import { useThree } from "@react-three/fiber";
 
-// declaratively
-extend({ BlendingShader });
-
-export default ({ summerRef }) => {
+export default ({ bgColor }) => {
   const { nodes } = useGLTF("./model.glb");
-  const { width: w, height: h } = useThree((state) => state.viewport);
-
+  const { width: w } = useThree((state) => state.viewport);
   return (
-    <Center scale={w / 12} position={[w * 1.2, 0.9, -0.5]} ref={summerRef}>
+    <Center scale={w / 12} position={[w * 1.1, 0.9, -0.5]}>
       <mesh geometry={nodes.window.geometry}>
         <meshStandardMaterial side={BackSide}>
           <GradientTexture
@@ -23,7 +18,7 @@ export default ({ summerRef }) => {
         </meshStandardMaterial>
       </mesh>
       <mesh geometry={nodes.window.geometry}>
-        <blendingShader colorOutside={new Color("rgb(18, 103, 130)")} />
+        <meshBasicMaterial toneMapped={false} color={new Color(bgColor)} />
       </mesh>
       <mesh geometry={nodes.window_frame.geometry}>
         <meshStandardMaterial color={"#bbd686"} />
@@ -31,15 +26,21 @@ export default ({ summerRef }) => {
       <mesh geometry={nodes.boba_cup.geometry}>
         <meshStandardMaterial
           color={"#ffffff"}
-          transparent={true}
+          transparent
           opacity={0.8}
+          depthWrite={false}
         />
       </mesh>
       <mesh geometry={nodes.milk.geometry}>
-        <meshStandardMaterial color={"#90a955"} />
+        <meshStandardMaterial
+          color={"#ccd5ae"}
+          transparent
+          opacity={0.7}
+          depthWrite={false}
+        />
       </mesh>
       <mesh geometry={nodes.boba.geometry}>
-        <meshStandardMaterial color={"#252422"} />
+        <meshStandardMaterial color={"#000000"} />
       </mesh>
       <mesh geometry={nodes.straw.geometry}>
         <meshStandardMaterial color={"#ffccd5"} />
