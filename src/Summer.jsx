@@ -7,7 +7,7 @@ export default ({ bgColor }) => {
   const { nodes } = useGLTF("./model.glb");
   const { width: w } = useThree((state) => state.viewport);
   return (
-    <Center scale={w / 12} position={[w * 1.1, 0.9, -0.5]}>
+    <Center scale={w / 12} position={[w * 1.1, 0.9, 0]}>
       <mesh geometry={nodes.window.geometry}>
         <meshStandardMaterial side={BackSide}>
           <GradientTexture
