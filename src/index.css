@@ -8,7 +8,7 @@ body,
   left: 0;
   width: 100%;
   height: 100%;
-  cursor: url("cursor.png"), default;
+  cursor: url("/cursor.png"), default;
 }
 
 canvas {
@@ -47,10 +47,10 @@ a {
   text-decoration: none;
   color: #ffffff;
   position: relative;
-  cursor: url("cursor.png"), default;
+  cursor: url("/cursor.png"), default;
 }
 a:hover {
-  cursor: url("cursor.png"), default;
+  cursor: url("/cursor.png"), default;
 }
 #name::before {
   background-color: #ffffff;
@@ -64,5 +64,5 @@ a:hover {
 a:hover #name::before {
   background-color: #ffffff;
   width: 3rem;
-  cursor: url("cursor.png"), default;
+  cursor: url("/cursor.png"), default;
 }
